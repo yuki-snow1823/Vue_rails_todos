@@ -31,7 +31,8 @@ export default {
   */
   plugins: [
     "@/plugins/vuetify", //追加
-    "@/plugins/axios",
+    "@/plugins/axios",//追加したら復活
+    "@/plugins/auth-check"
   ],
   /*
   ** Nuxt.js dev-modules
