@@ -44,24 +44,28 @@ export default {
       error: ""
     };
   },
-  methods: {
+methods: {
    signup() {
       if (this.password !== this.passwordConfirm) {
         this.error = "※パスワードとパスワード確認が一致していません";
       }
- firebase
-   .auth()
-     .createUserWithEmailAndPassword(this.email, this.password)
-       .then(res => {
+
+      this.$store.commit("setLoading", true);//ローディングをonにする
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(res => {
           const user = {
             email: res.user.email,
             name: this.name,
             uid: res.user.uid
           };
-          axios.post("/v1/users",{ user }).then(() => {
+          axios.post("/v1/users", { user }).then(res => {//追加
+            this.$store.commit("setLoading", false);//ローディングをoffにする
+            this.$store.commit("setUser", res.data); //promiseの値をstoreに入れる
             this.$router.push("/");
           });
-       })
+        })
         .catch(error => {
           this.error = (code => {
             switch (code) {

@@ -6,13 +6,16 @@ Vue.use(Vuex)
 const store = () => {
     return new Vuex.Store({
         state: {
-            currentUser: null,
+            loading: false  // 追加
         },
         mutations: {
-            setUser(state, payload) {
-                state.currentUser = payload
-            },
-        },
+              setUser(state, payload) {
+                  state.currentUser = payload
+              },
+              setLoading(state, payload) {
+                  state.loading = payload //追加
+              }
+          },
         actions: {
         }
     })
