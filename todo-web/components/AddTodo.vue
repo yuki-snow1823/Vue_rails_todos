@@ -21,7 +21,11 @@ export default {
   },
   methods: {
     handleSubmit() {
-      this.$emit("submit", this.title);  //この行を追加
+      const todo = {
+        title: this.title,
+        user_id: this.user.id,
+      };
+      this.$emit("submit", todo); 
       this.title = "";
     }
   }
